@@ -25,12 +25,14 @@ public class StudentController {
 	@GetMapping("/view")
 	public String findAll(Model model) {
 		List<Student> students = impl.findAll();
-		model.addAttribute("stu", students);
+		model.addAttribute("students", students);
 		return "viewStudent";
 	}
-	@PostMapping("/update/{id}")
+	@RequestMapping("/update/{id}")
 	public String updateStudent(@PathVariable("id") String id, Model model) {
 		impl.save(id);
+		List<Student> students = impl.findAll();
+		model.addAttribute("students", students);
 		return "viewStudent";
 	}
 	@PostMapping("delete/{id}")
